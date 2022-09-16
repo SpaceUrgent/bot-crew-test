@@ -15,11 +15,15 @@ public class Degree {
     private DegreeName degreeName;
 
     public enum DegreeName {
-        ASSISTANT("Assistant"),
-        ASSOCIATE_PROFESSOR("Associate professor"),
-        PROFESSOR("Professor");
+        ASSISTANT("assistant"),
+        ASSOCIATE_PROFESSOR("associate professor"),
+        PROFESSOR("professor");
 
         private String value;
+
+        public String getValue() {
+            return value;
+        }
 
         DegreeName(String value) {
             this.value = value;

@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DepartmentHeadHandler implements OperationHandler {
-//    private static final String INPUT_TEMPLATE = "Who is head of department ";
-    private static final int DEPARTMENT_NAME_START = 25;
+    private static final int DEPARTMENT_NAME_START = 26;
     private DepartmentService departmentService;
 
     @Autowired
