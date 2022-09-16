@@ -15,13 +15,13 @@
 	<description>Test task</description>
 	<properties>
 		<java.version>11</java.version>
+		<testcontainers.version>1.16.2</testcontainers.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -29,23 +29,106 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.22</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.1.6.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.22</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>mysql</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.testcontainers</groupId>
+				<artifactId>testcontainers-bom</artifactId>
+				<version>${testcontainers.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.springframework.boot</groupId>-->
+<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--			</plugin>-->
+<!--			<plugin>-->
+<!--				<groupId>org.codehaus.mojo</groupId>-->
+<!--				<artifactId>sql-maven-plugin</artifactId>-->
+<!--				<version>1.5</version>-->
+
+<!--				<dependencies>-->
+<!--					<dependency>-->
+<!--						<groupId>com.h2database</groupId>-->
+<!--						<artifactId>h2</artifactId>-->
+<!--						<version>2.1.214</version>-->
+<!--					</dependency>-->
+<!--				</dependencies>-->
+
+<!--				<configuration>-->
+<!--					<driver>org.h2.Driver</driver>-->
+<!--					<url>jdbc:h2:file:./target/db/testdb</url>-->
+<!--					<username>sa</username>-->
+<!--					<password>Abcd1234</password>-->
+<!--					<autocommit>true</autocommit>-->
+<!--					<skip>false</skip>-->
+<!--				</configuration>-->
+
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>create-db</id>-->
+<!--						<phase>process-test-resources</phase>-->
+<!--						<goals>-->
+<!--							<goal>execute</goal>-->
+<!--						</goals>-->
+<!--						<configuration>-->
+<!--							<srcFiles>-->
+<!--								<srcFile>./src/test/resources/tables.sql</srcFile>-->
+<!--							</srcFiles>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+
+<!--					<execution>-->
+<!--						<id>drop-db-after-test</id>-->
+<!--						<phase>post-integration-test</phase>-->
+<!--						<goals>-->
+<!--							<goal>execute</goal>-->
+<!--						</goals>-->
+<!--						<configuration>-->
+<!--							<srcFiles>-->
+<!--								<srcFile>./src/test/resources/drop-schema.sql</srcFile>-->
+<!--							</srcFiles>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 
