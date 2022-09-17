@@ -2,8 +2,6 @@ package com.test.taskchat.repository;
 
 import com.test.taskchat.entity.Degree;
 import com.test.taskchat.entity.Lector;
-import com.test.taskchat.repository.DegreeRepository;
-import com.test.taskchat.repository.LectorRepository;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -12,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -54,5 +53,17 @@ public class LectorRepository_Test {
                 actual.get().getDegree().getDegreeName());
         assertEquals(BigDecimal.valueOf(1000).stripTrailingZeros(),
                 actual.get().getSalary().stripTrailingZeros());
+    }
+
+    @Test
+    public void findByFirstOrLastNameLike_Ok() {
+        List<Lector> actualOne = lectorRepository.
+                findByFirstOrLastNameLike("ob");
+        List<Lector> actualTwo = lectorRepository.
+                findByFirstOrLastNameLike("rui");
+        assertTrue(actualOne.size() == 1);
+        assertTrue(actualTwo.size() == 1);
+        assertEquals(FIRST_NAME, actualOne.get(0).getFirstName());
+        assertEquals(LAST_NAME, actualOne.get(0).getLastName());
     }
 }

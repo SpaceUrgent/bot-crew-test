@@ -15,7 +15,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.util.List;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension.class)
 public class DepartmentHeadHandler_Test {
     private static final String INPUT = "Who is head of department Science";
@@ -27,7 +26,7 @@ public class DepartmentHeadHandler_Test {
     @Mock
     private DepartmentService departmentService;
 
-    @BeforeAll
+    @BeforeEach
     public void setup() {
         Degree professorDegree = new Degree();
         professorDegree.setDegreeName(Degree.DegreeName.PROFESSOR);
@@ -41,9 +40,6 @@ public class DepartmentHeadHandler_Test {
         department.setHead(bob);
         department.setLectors(List.of(bob));
     }
-
-    @AfterAll
-    public void close() {}
 
     @Test
     public void handle_Ok() {

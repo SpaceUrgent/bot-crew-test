@@ -17,7 +17,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension.class)
 public class DepartmentStatisticsHandler_Test {
     private static final String INPUT = "Show Science statistics.";
@@ -30,7 +29,7 @@ public class DepartmentStatisticsHandler_Test {
     @Mock
     private DepartmentService departmentService;
 
-    @BeforeAll
+    @BeforeEach
     public void setup() {
         List<Lector> lectors = new ArrayList<>();
         Lector lector;
@@ -57,9 +56,6 @@ public class DepartmentStatisticsHandler_Test {
         department.setHead(lectors.get(0));
         department.setLectors(lectors);
     }
-
-    @AfterAll
-    public void close() {}
 
     @Test
     public void handle_Ok() {

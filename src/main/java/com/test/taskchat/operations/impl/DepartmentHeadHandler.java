@@ -1,14 +1,14 @@
 package com.test.taskchat.operations.impl;
 
 import com.test.taskchat.entity.Lector;
-import com.test.taskchat.operations.OperationHandler;
+import com.test.taskchat.operations.RequestHandler;
 import com.test.taskchat.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DepartmentHeadHandler implements OperationHandler {
-    private static final int DEPARTMENT_NAME_START = 26;
+public class DepartmentHeadHandler implements RequestHandler {
+    private static final int DEPARTMENT_NAME_INDEX = 26;
     private DepartmentService departmentService;
 
     @Autowired
@@ -18,7 +18,7 @@ public class DepartmentHeadHandler implements OperationHandler {
 
     @Override
     public String handle(String input) {
-        String departmentName = input.substring(DEPARTMENT_NAME_START);
+        String departmentName = input.substring(DEPARTMENT_NAME_INDEX);
         Lector lector = departmentService.findByName(departmentName).getHead();
         String headFirstName = lector.getFirstName();
         String headLastName = lector.getLastName();
