@@ -5,13 +5,13 @@ import com.test.task.operations.impl.DepartmentHeadHandler;
 import com.test.task.operations.impl.DepartmentStatisticsHandler;
 import com.test.task.operations.impl.EmployeeCountHandler;
 import com.test.task.operations.impl.NameTemplateHandler;
-import com.test.task.strategy.RequestDispatcher;
+import com.test.task.strategy.RequestResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RequestDispatcherImpl implements RequestDispatcher {
+public class RequestResolverImpl implements RequestResolver {
     private static final String HEAD_OF_DEPARTMENT = "head of department";
     private static final String STATISTICS = "statistics";
     private static final String AVERAGE_SALARY = "average salary";

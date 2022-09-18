@@ -4,9 +4,10 @@ import com.test.task.entity.Lector;
 import com.test.task.operations.RequestHandler;
 import com.test.task.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 public class DepartmentHeadHandler implements RequestHandler {
     private static final int DEPARTMENT_NAME_INDEX = 27;
     @Autowired

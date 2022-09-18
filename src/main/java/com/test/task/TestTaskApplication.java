@@ -1,7 +1,8 @@
 package com.test.task;
 
-import com.test.task.runner.Command;
-import com.test.task.strategy.RequestDispatcher;
+import java.util.Scanner;
+import com.test.task.command.Command;
+import com.test.task.strategy.RequestResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
@@ -9,8 +10,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import picocli.CommandLine;
 import picocli.spring.PicocliSpringFactory;
-
-import java.util.Scanner;
 
 @SpringBootApplication
 public class TestTaskApplication implements CommandLineRunner, ExitCodeGenerator {
@@ -29,7 +28,7 @@ public class TestTaskApplication implements CommandLineRunner, ExitCodeGenerator
 	}
 
 	@Autowired
-	private RequestDispatcher requestDispatcher;
+	private RequestResolver requestDispatcher;
 
 	@Override
 	public void run(String... args) throws Exception {
