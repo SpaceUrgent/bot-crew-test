@@ -2,7 +2,7 @@ package com.test.task;
 
 import java.util.Scanner;
 import com.test.task.command.Command;
-import com.test.task.strategy.RequestResolver;
+import com.test.task.strategy.RequestStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
@@ -28,7 +28,7 @@ public class TestTaskApplication implements CommandLineRunner, ExitCodeGenerator
 	}
 
 	@Autowired
-	private RequestResolver requestDispatcher;
+	private RequestStrategy requestDispatcher;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -37,6 +37,10 @@ public class TestTaskApplication implements CommandLineRunner, ExitCodeGenerator
 			System.out.println("Please enter input here. To shut down the application type 'Close'");
 			Scanner scanner = new Scanner(System.in);
 			input = scanner.nextLine();
+			if (input.equalsIgnoreCase("close")) {
+				System.out.println("Shut down");
+				break;
+			}
 			exitCode = new CommandLine(command, factory).execute("-i " + input);
 		}
 	}
