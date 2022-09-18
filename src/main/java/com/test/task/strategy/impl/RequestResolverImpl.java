@@ -1,43 +1,37 @@
 package com.test.task.strategy.impl;
 
+import com.test.task.enums.Request;
+import com.test.task.operations.RequestHandler;
 import com.test.task.operations.impl.AverageSalaryHandler;
 import com.test.task.operations.impl.DepartmentHeadHandler;
 import com.test.task.operations.impl.DepartmentStatisticsHandler;
 import com.test.task.operations.impl.EmployeeCountHandler;
 import com.test.task.operations.impl.NameTemplateHandler;
-import com.test.task.strategy.RequestResolver;
+import com.test.task.strategy.RequestStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RequestResolverImpl implements RequestResolver {
-    private static final String HEAD_OF_DEPARTMENT = "head of department";
-    private static final String STATISTICS = "statistics";
-    private static final String AVERAGE_SALARY = "average salary";
-    private static final String COUNT_EMPLOYEE = "count of employee";
-    private static final String SEARCH_BY = "search by";
-    private static final String CLOSE = " close";
+public class RequestResolverImpl implements RequestStrategy {
+
     @Autowired
     private ApplicationContext context;
 
     @Override
-    public String resolve(Object input) {
-        switch (input) {
-            case String s && s.contains(HEAD_OF_DEPARTMENT):
-                return context.getBean(DepartmentHeadHandler.class).handle((String) input);
-            case String s && s.contains(STATISTICS):
-                return context.getBean(DepartmentStatisticsHandler.class).handle((String) input);
-            case String s && s.contains(AVERAGE_SALARY):
-                return context.getBean(AverageSalaryHandler.class).handle((String) input);
-            case String s && s.contains(COUNT_EMPLOYEE):
-                return context.getBean(EmployeeCountHandler.class).handle((String) input);
-            case String s && s.contains(SEARCH_BY):
-                return context.getBean(NameTemplateHandler.class).handle((String) input);
-            case String s && s.equalsIgnoreCase(CLOSE):
-                return "Shut down";
-            default:
-                throw new RuntimeException("Unknown command: " + input);
+    public RequestHandler getHandler(Request request) {
+        switch (request) {
+            case HEAD_OF_DEPARTMENT:
+                return context.getBean(DepartmentHeadHandler.class);
+            case STATISTICS:
+                return context.getBean(DepartmentStatisticsHandler.class);
+            case AVERAGE_SALARY:
+                return context.getBean(AverageSalaryHandler.class);
+            case COUNT_EMPLOYEE:
+                return context.getBean(EmployeeCountHandler.class);
+            case SEARCH_BY:
+                return context.getBean(NameTemplateHandler.class);
         }
+        return null;
     }
 }

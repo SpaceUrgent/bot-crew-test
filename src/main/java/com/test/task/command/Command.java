@@ -1,6 +1,7 @@
 package com.test.task.command;
 
-import com.test.task.strategy.RequestResolver;
+import com.test.task.enums.Request;
+import com.test.task.strategy.RequestStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Option;
@@ -10,7 +11,7 @@ import java.util.concurrent.Callable;
 @Component
 public class Command implements Callable<Integer> {
     @Autowired
-    private RequestResolver requestDispatcher;
+    private RequestStrategy requestDispatcher;
 
     @Option(names = "-i",
             description = "The input for execution",
@@ -21,7 +22,11 @@ public class Command implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         try {
-            System.out.println("Output: " + requestDispatcher.resolve(input));
+            Request request = Request.ifContains(input);
+            if (request == null) {
+                throw new RuntimeException("Unknown command: " + input);
+            }
+            System.out.println("Output: " + requestDispatcher.getHandler(request).handle(input));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
