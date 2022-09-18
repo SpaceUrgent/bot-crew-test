@@ -1,5 +1,5 @@
 package com.test.task.strategy;
 
-public interface RequestDispatcher {
+public interface RequestResolver {
     String resolve(Object input);
 }
